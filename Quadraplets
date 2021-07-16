@@ -1,0 +1,69 @@
+Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:
+
+0 <= a, b, c, d < n
+a, b, c, and d are distinct.
+nums[a] + nums[b] + nums[c] + nums[d] == target
+You may return the answer in any order.
+
+ 
+
+Example 1:
+
+Input: nums = [1,0,-1,0,-2,2], target = 0
+Output: [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+Example 2:
+
+Input: nums = [2,2,2,2,2], target = 8
+Output: [[2,2,2,2]]
+
+
+
+
+public class Solution {
+    public IList<IList<int>> FourSum(int[] nums, int target) {
+        
+        //Result needs to be a int[] of length 4
+        // [1,2,3,4,5]
+        //[1,2,3,4]
+        //[-2,-1,0,1,2]
+        int[] one = nums;
+        int[] two = nums;
+        int[] three = nums;
+        int[] four = nums;
+        
+        IList<IList<int>> result = new List<IList<int>>();
+        
+        for(int o = 0;o < one.Length;o++){
+            for(int t = 0; t < two.Length; t++){
+                for(int th = 0; th < three.Length;th++){
+                    for(int f = 0;f < four.Length;f++){
+                        if((one[o]+two[t]+three[th]+four[f]) == 0){
+                            int[] newOne = new int[] { one[o],two[t],three[th],four[f] };
+                            bool exists = false;
+                            
+                            for(int r = 0; r<result.Count;r++){
+                                //Console.WriteLine("[{0}] : [{1}]", string.Join(", ", result[r]), string.Join(", ", newOne) );
+                                //if(Enumerable.SequenceEqual(result[r],newOne)){
+                                   // exists = true;
+                                    //return;
+                                //}
+                                if(o != t && o != th && o != f &&
+                                  t != th && t != f &&
+                                  th != f){
+                                    result.Add(newOne);
+                                }
+                            }
+                            
+                            if(exists == false){
+                                //Console.WriteLine("[{0},{1},{2},{3}] {4}",one[o],two[t],three[th],four[f], exists);
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        return result;
+    }
+}
